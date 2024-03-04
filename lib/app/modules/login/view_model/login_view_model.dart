@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:task_innovatrix_infotech/app/core/routes/app_routes.dart';
+import 'package:task_innovatrix_infotech/app/data/db/db_helper.dart';
+import 'package:task_innovatrix_infotech/app/data/model/user_data_model.dart';
 
 class LoginViewModel extends ChangeNotifier {
   String email = '';
   String password = '';
+  DatabaseHelper db = DatabaseHelper();
+  bool _isNavigating = false;
+
+  bool get isNavigating => _isNavigating;
+
+  void setNavigating(bool value) {
+    _isNavigating = value;
+    notifyListeners();
+  }
 
   void setEmail(String value) {
     email = value;
@@ -18,8 +31,35 @@ class LoginViewModel extends ChangeNotifier {
     return email.isNotEmpty && password.isNotEmpty;
   }
 
-  void login() {
-    // Add your login logic here
-    print('Logging in with: $email, $password');
+  Future<void> login(context) async {
+    setNavigating(true);
+    try {
+      UserData userData = UserData(email: email, password: password);
+      await db.initDB();
+      bool userExists = await db.checkForUser(userData);
+      if (userExists) {
+        Fluttertoast.showToast(
+            msg: "Login Successfully",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        Navigator.of(context).pushReplacementNamed(Routes.home);
+        setNavigating(false);
+      } else {
+        Fluttertoast.showToast(
+            msg: "Please Signup",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

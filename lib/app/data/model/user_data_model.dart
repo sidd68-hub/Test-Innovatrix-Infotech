@@ -1,16 +1,11 @@
 class UserData {
   int? id;
-  String name;
-  String email;
-  String password;
-  String mobile;
+  String? name;
+  String? email;
+  String? password;
+  String? mobile;
 
-  UserData(
-      {this.id,
-      required this.name,
-      required this.email,
-      required this.mobile,
-      required this.password});
+  UserData({this.id, this.name, this.email, this.mobile, this.password});
 
   UserData.fromMap(Map<String, dynamic> res)
       : id = res["id"],
