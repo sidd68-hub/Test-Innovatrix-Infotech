@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_innovatrix_infotech/app/modules/home/view/home_screen.dart';
 import 'package:task_innovatrix_infotech/app/modules/login/view/login_screen.dart';
+import 'package:task_innovatrix_infotech/app/modules/profile/view/profile_screen.dart';
 import 'package:task_innovatrix_infotech/app/modules/signup/view/signup_view.dart';
 import 'package:task_innovatrix_infotech/app/modules/splash/view/splash_screen.dart';
 
@@ -13,9 +14,9 @@ class Routes {
   static const String login = '/login';
   static const String signup = '/signup';
   static const String home = '/home';
+  static const String profile = '/profile';
 
   Route<dynamic>? generateRoute(RouteSettings settings) {
-    print("The settings is ${settings.name}");
     switch (settings.name) {
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
@@ -25,6 +26,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case profile:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => const UnknownScreen());
