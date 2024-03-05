@@ -74,7 +74,7 @@ class ProfileViewModel extends ChangeNotifier {
   }
 
   void updateDb() async {
-    setLoading(true);
+    setLoading(false);
     UserData userData = UserData(
         id: id,
         name: name,
@@ -82,7 +82,7 @@ class ProfileViewModel extends ChangeNotifier {
         password: password,
         mobile: phoneNumber);
     db.updateUser(userData);
-    setLoading(false);
+    setLoading(true);
     getUser(id!);
   }
 }

@@ -16,7 +16,7 @@ The app offers the following features:
 
 ## Screen Recording
 
-![]()
+![](https://github.com/sidd68-hub/Test-Innovatrix-Infotech/blob/main/assets/gif/task_innovatrix_infotech.gif)
 
 
 ## How it Works 
@@ -43,7 +43,7 @@ To run the application locally, follow these steps:
 
 ## Release APK
 You can download the latest release APK from here.
-[Download APK]()
+[Download APK](https://github.com/sidd68-hub/Test-Innovatrix-Infotech/raw/main/assets/apk/apk-release.apk)
 
 
 ## Technologies Used
