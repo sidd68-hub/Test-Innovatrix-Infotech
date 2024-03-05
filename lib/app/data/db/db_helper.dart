@@ -29,14 +29,14 @@ class DatabaseHelper {
     }, version: 1);
   }
 
-  Future<bool> checkForUser(UserData user) async {
+  Future<int> checkForUser(UserData user) async {
     List<Map<String, dynamic>> result = await db.query('users',
         where: "email = ? AND password = ?",
         whereArgs: [user.email, user.password]);
     if (result.isNotEmpty) {
-      return true;
+      return result[0]['id'] as int;
     } else {
-      return false;
+      return 0;
     }
   }
 
@@ -51,6 +51,20 @@ class DatabaseHelper {
   Future<List<UserData>> retrieveUser() async {
     try {
       final List<Map<String, Object?>> queryResult = await db.query('users');
+      return queryResult.map((e) => UserData.fromMap(e)).toList();
+    } catch (e) {
+      print('Error retrieving users: $e');
+      return []; // Return an empty list in case of error
+    }
+  }
+
+  Future<List<UserData>> retrieveUserById(int id) async {
+    try {
+      final List<Map<String, Object?>> queryResult = await db.query(
+        'users',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
       return queryResult.map((e) => UserData.fromMap(e)).toList();
     } catch (e) {
       print('Error retrieving users: $e');

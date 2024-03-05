@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task_innovatrix_infotech/app/core/routes/app_routes.dart';
 import 'package:task_innovatrix_infotech/app/data/db/db_helper.dart';
+
 import 'package:task_innovatrix_infotech/app/data/model/user_data_model.dart';
 
 class LoginViewModel extends ChangeNotifier {
@@ -32,12 +34,14 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   Future<void> login(context) async {
-    setNavigating(true);
+    // setNavigating(true);
     try {
       UserData userData = UserData(email: email, password: password);
       await db.initDB();
-      bool userExists = await db.checkForUser(userData);
-      if (userExists) {
+      int userExists = await db.checkForUser(userData);
+      if (userExists != 0) {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setInt('id', userExists);
         Fluttertoast.showToast(
             msg: "Login Successfully",
             toastLength: Toast.LENGTH_SHORT,
@@ -46,8 +50,8 @@ class LoginViewModel extends ChangeNotifier {
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
+        // setNavigating(false);
         Navigator.of(context).pushReplacementNamed(Routes.home);
-        setNavigating(false);
       } else {
         Fluttertoast.showToast(
             msg: "Please Signup",

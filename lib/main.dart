@@ -9,7 +9,7 @@ late DatabaseHelper db;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final db = DatabaseHelper();
+  db = DatabaseHelper();
   await db.initDB();
   runApp(const ProviderScope(child: MyApp()));
 }

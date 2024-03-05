@@ -40,6 +40,9 @@ dependencies:
   fluttertoast: ^8.2.4
   flutter_riverpod: ^2.4.10
   google_fonts: ^6.0.0
+  shared_preferences: ^2.2.2
+  graphql_flutter: ^5.1.2
+  connectivity_plus: 
 
 
 dev_dependencies:
