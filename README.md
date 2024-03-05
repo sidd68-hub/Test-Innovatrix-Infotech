@@ -43,7 +43,7 @@ To run the application locally, follow these steps:
 
 ## Release APK
 You can download the latest release APK from here.
-[Download APK](https://github.com/sidd68-hub/Test-Innovatrix-Infotech/blob/main/assets/apk/app-release.apk)
+[Download APK](https://github.com/sidd68-hub/Test-Innovatrix-Infotech/raw/main/assets/apk/app-release.apk)
 
 
 
